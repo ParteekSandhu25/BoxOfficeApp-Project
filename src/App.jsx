@@ -3,33 +3,22 @@ import Home from './Pages/Home';
 import Starred from './Pages/Starred';
 import MainLayout from './Components/MainLayout';
 import Show from './Pages/Show';
+import { GlobalTheme } from './theme';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/starred" element={<Starred />} />
-        </Route>
-
-        <Route path="/show/:showId" element={<Show />} />
-
-        {/* <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="teams" element={<Teams />}>
-            <Route path=":teamId" element={<Team />} />
-            <Route path="new" element={<NewTeamForm />} />
-            <Route index element={<LeagueStandings />} />
+    <GlobalTheme>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/starred" element={<Starred />} />
           </Route>
-        </Route>
-        <Route element={<PageLayout />}>
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/tos" element={<Tos />} />
-        </Route>
-        <Route path="contact-us" element={<Contact />} /> */}
-      </Routes>
-    </BrowserRouter>
+
+          <Route path="/show/:showId" element={<Show />} />
+        </Routes>
+      </BrowserRouter>
+    </GlobalTheme>
   );
 }
 
