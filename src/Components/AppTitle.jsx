@@ -3,7 +3,7 @@ import { TextCenter } from './Common/TextCenter';
 
 export default function AppTitle(props) {
   const {
-    title = 'BoxOffic App',
+    title = 'BoxOffice App',
     subTitle = 'Are you looking for an actor or a movie...',
   } = props;
 
