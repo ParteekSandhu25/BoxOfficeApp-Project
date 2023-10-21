@@ -1,3 +1,4 @@
+import { TextCenter } from '../Components/Common/TextCenter';
 import ShowGrid from '../Components/shows/ShowGrid';
 import { getShowsByIds } from '../api/tvmaze';
 import { useStarredShows } from '../lib/useStarShow';
@@ -20,17 +21,17 @@ function Starred() {
   console.log({ starredShows });
 
   if (starredShows?.length === 0) {
-    return <p>No shows were starred...</p>;
+    return <TextCenter>No shows were starred...</TextCenter>;
   }
   if (starredShows?.length > 0) {
     return <ShowGrid shows={starredShows} />;
   }
 
   if (starredShowsError) {
-    return <div>Error Occurred: {starredShowsError.message}</div>;
+    return <TextCenter>Error Occurred: {starredShowsError.message}</TextCenter>;
   }
 
-  return <div>Loading...</div>;
+  return <TextCenter>Loading...</TextCenter>;
 }
 
 export default Starred;

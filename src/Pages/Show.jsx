@@ -5,26 +5,8 @@ import ShowMainData from '../Components/shows/ShowMainData';
 import Details from '../Components/shows/Details';
 import Seasons from '../Components/shows/Seasons';
 import Cast from '../Components/shows/Cast';
-
-// const useShowById = showId => {
-//   const [showData, setShowData] = useState(null);
-//   const [showError, setShowError] = useState(null);
-
-//   useEffect(() => {
-//     async function fetchData() {
-//       try {
-//         const data = await getShowById(showId);
-//         setShowData(data);
-//       } catch (error) {
-//         setShowError(error);
-//       }
-//     }
-
-//     fetchData();
-//   }, [showId]);
-
-//   return { showData, showError };
-// };
+import styled from 'styled-components';
+import { TextCenter } from '../Components/Common/TextCenter';
 
 function Show() {
   const { showId } = useParams();
@@ -40,8 +22,10 @@ function Show() {
 
   if (showData) {
     return (
-      <div>
-        <Link to={'/'}>GO back to Home</Link>
+      <ShowPageWrapper>
+        <BackHomeWrapper>
+          <Link to={'/'}>GO back to Home</Link>
+        </BackHomeWrapper>
 
         <ShowMainData
           image={showData.image}
@@ -51,28 +35,65 @@ function Show() {
           genres={showData.genres}
         />
 
-        <h2>Details</h2>
+        <InfoBlock>
+          <h2>Details</h2>
+          <Details
+            status={showData.status}
+            premiered={showData.premiered}
+            network={showData.network}
+          />
+        </InfoBlock>
 
-        <Details
-          status={showData.status}
-          premiered={showData.premiered}
-          network={showData.network}
-        />
+        <InfoBlock>
+          <h1>Seasons:</h1>
+          <Seasons seasons={showData._embedded.seasons} />
+        </InfoBlock>
 
-        <h1>Seasons:</h1>
-        <Seasons seasons={showData._embedded.seasons} />
-
-        <h1>Cast</h1>
-        <Cast cast={showData._embedded.cast} />
-      </div>
+        <InfoBlock>
+          <h1>Cast</h1>
+          <Cast cast={showData._embedded.cast} />
+        </InfoBlock>
+      </ShowPageWrapper>
     );
   }
 
   if (showError) {
-    return <p>We have an error: {showError.message}</p>;
+    return <TextCenter>We have an error: {showError.message}</TextCenter>;
   }
 
-  return <div>Loading...</div>;
+  return <TextCenter>Loading...</TextCenter>;
 }
 
 export default Show;
+
+const BackHomeWrapper = styled.div`
+  margin-bottom: 30px;
+  text-align: left;
+  a {
+    padding: 10px;
+    color: ${({ theme }) => theme.mainColors.dark};
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+const ShowPageWrapper = styled.div`
+  margin: auto;
+  @media only screen and (min-width: 768px) {
+    max-width: 700px;
+  }
+  @media only screen and (min-width: 992px) {
+    max-width: 900px;
+  }
+`;
+
+const InfoBlock = styled.div`
+  margin-bottom: 40px;
+  h2 {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 22px;
+  }
+`;

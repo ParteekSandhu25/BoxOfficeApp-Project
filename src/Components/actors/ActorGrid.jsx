@@ -1,15 +1,14 @@
+import { FlexGrid } from '../Common/FlexGrid';
 import ActorCard from './ActorCard';
 
 function ActorGrid({ actors }) {
   return (
-    <div>
+    <FlexGrid>
       {actors.map(data => (
         <ActorCard
           key={data.person.id}
           name={data.person.name}
-          country={
-            data.person.country ? data.person.country.name : 'Country Not known'
-          }
+          country={data.person.country ? data.person.country.name : null}
           birthday={data.person.birthday}
           deathday={data.person.deathday}
           gender={data.person.gender}
@@ -22,7 +21,7 @@ function ActorGrid({ actors }) {
           {data.person.name}
         </ActorCard>
       ))}
-    </div>
+    </FlexGrid>
   );
 }
 

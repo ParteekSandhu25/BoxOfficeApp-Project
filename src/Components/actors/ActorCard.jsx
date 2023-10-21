@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { SearchCard, SearchImgWrapper } from '../Common/SearchCard';
 
 export default function ActorCard({
   name,
@@ -10,22 +11,19 @@ export default function ActorCard({
   deathday,
 }) {
   return (
-    <div>
-      <img src={image} alt={name} />
+    <SearchCard>
+      <SearchImgWrapper>
+        <img src={image} alt={name} />
+      </SearchImgWrapper>
       <h1>
         {name} {!!gender && `(${gender})`}
       </h1>
 
-      <p>{country ? `Comes from ${country}` : 'Country Not known'}</p>
+      <p>{country ? `Comes from ${country}` : 'No Country Known'}</p>
 
       {!!birthday && <p>Born {birthday}</p>}
 
       <p>{deathday ? `Died ${deathday}` : 'Alive'}</p>
-
-      <div>
-        <Link to="/">Read More</Link>
-        <button type="button">Star me</button>
-      </div>
-    </div>
+    </SearchCard>
   );
 }
