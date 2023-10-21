@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
+import NotFoundImageSrc from '../../lib/not-found-image.png';
 import { useStarredShows } from '../../lib/useStarShow';
 import ShowCard from './ShowCard';
 import { FlexGrid } from '../Common/FlexGrid';
@@ -22,9 +23,7 @@ function ShowGrid({ shows }) {
         <ShowCard
           key={data.show.id}
           name={data.show.name}
-          image={
-            data.show.image ? data.show.image.medium : '/not-found-image.png'
-          }
+          image={data.show.image ? data.show.image.medium : NotFoundImageSrc}
           id={data.show.id}
           summary={data.show.summary}
           onStarClick={onStarMeClick}
